@@ -1,34 +1,376 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profil Mahasiswa</title>
+
   <style>
-    body {font-family: Arial, sans-serif; background:#eef2f7; margin:0; color:#1e293b}
-    header {background:#164e63; color:white; text-align:center; padding:28px}
-    main {max-width:760px; margin:24px auto; background:white; padding:24px; border-radius:12px}
-    h2 {color:#0e7490}
-    footer {text-align:center; padding:16px}
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      color: #1e293b;
+    }
+
+    header {
+      background: linear-gradient(135deg, #164e63, #6d28d9);
+      color: white;
+      text-align: center;
+      padding: 35px 15px 75px;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+    }
+
+    main {
+      max-width: 750px;
+      margin: -45px auto 25px;
+      padding: 0 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px #0000000d;
+    }
+
+    .profile {
+      text-align: center;
+    }
+
+    #fotoProfil {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #0e7490;
+      background: #e2e8f0;
+      display: block;
+      margin: -75px auto 15px;
+    }
+
+    h2 {
+      color: #0e7490;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 18px;
+      background: #0e7490;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .btn:hover {
+      background: #164e63;
+    }
+
+    .btn-hapus {
+      background: #dc2626;
+    }
+
+    .btn-hapus:hover {
+      background: #991b1b;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font: inherit;
+    }
+
+    .biodata {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .item {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .item small {
+      display: block;
+      color: #64748b;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+    }
+
+    @media (max-width: 500px) {
+      .biodata {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
   </style>
 </head>
+
 <body>
+
   <header>
-    <h1>Website Profil Mahasiswa</h1>
-    <p>Praktik Administrasi Website</p>
+    <h1>Profil Mahasiswa</h1>
+    <p>Website Biodata dan Profil Pribadi</p>
   </header>
+
   <main>
-    <h2>Profil Singkat</h2>
-    <p>Halo, saya [Nama Mahasiswa]. Saya sedang belajar memublikasikan website.</p>
-    <h2>Informasi</h2>
-    <ul>
-      <li>Program Studi: Informatika</li>
-      <li>Mata Kuliah: Administrasi Website</li>
-      <li>Topik: Hosting dan publikasi website</li>
-    </ul>
-    <h2>Tujuan</h2>
-    <p>Halaman ini dibuat sebagai latihan mengunggah HTML ke layanan hosting.</p>
+
+    <section class="card profile">
+      <img
+        id="fotoProfil"
+        src="https://placehold.co/300x300/e2e8f0/164e63?text=Foto+Profil"
+        alt="Foto profil mahasiswa"
+      >
+
+      <h2 id="tampilNama">Syabila Yahya</h2>
+      <p id="tampilProdi">Mahasiswa Informatika</p>
+
+      <!-- INPUT FOTO -->
+      <input
+        type="file"
+        id="inputFoto"
+        accept="image/*"
+        hidden
+      >
+
+      <button
+        type="button"
+        class="btn"
+        onclick="document.getElementById('inputFoto').click()"
+      >
+        📷 Pilih Foto
+      </button>
+
+      <p id="statusFoto" aria-live="polite">
+        Pilih foto dari galeri atau folder perangkat.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>📝 Isi Biodata</h2>
+
+      <div class="form-group">
+        <label for="nama">Nama Lengkap</label>
+        <input id="nama" placeholder="Masukkan nama lengkap">
+      </div>
+
+      <div class="form-group">
+        <label for="nim">NIM</label>
+        <input id="nim" placeholder="Masukkan NIM">
+      </div>
+
+      <div class="form-group">
+        <label for="prodi">Program Studi</label>
+        <input id="prodi" placeholder="Contoh: Informatika">
+      </div>
+
+      <div class="form-group">
+        <label for="kampus">Nama Universitas</label>
+        <input id="kampus" placeholder="Masukkan nama universitas">
+      </div>
+
+      <div class="form-group">
+        <label for="ttl">Tempat, Tanggal Lahir</label>
+        <input id="ttl" placeholder="Contoh: Makassar, 1 Januari 2005">
+      </div>
+
+      <div class="form-group">
+        <label for="jk">Jenis Kelamin</label>
+        <select id="jk">
+          <option value="">Pilih jenis kelamin</option>
+          <option>Laki-laki</option>
+          <option>Perempuan</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="alamat">Alamat</label>
+        <textarea id="alamat" rows="2"
+          placeholder="Masukkan alamat yang ingin ditampilkan"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="nama@email.com">
+      </div>
+
+      <button type="button" class="btn" onclick="simpanBiodata()">
+        💾 Tampilkan Biodata
+      </button>
+    </section>
+
+    <section class="card">
+      <h2>👤 Biodata Saya</h2>
+
+      <div class="biodata">
+        <div class="item">
+          <small>Nama Lengkap</small>
+          <strong id="hasilNama">-</strong>
+        </div>
+
+        <div class="item">
+          <small>NIM</small>
+          <strong id="hasilNim">-</strong>
+        </div>
+
+        <div class="item">
+          <small>Program Studi</small>
+          <strong id="hasilProdi">-</strong>
+        </div>
+
+        <div class="item">
+          <small>Universitas</small>
+          <strong id="hasilKampus">-</strong>
+        </div>
+
+        <div class="item">
+          <small>Tempat, Tanggal Lahir</small>
+          <strong id="hasilTtl">-</strong>
+        </div>
+
+        <div class="item">
+          <small>Jenis Kelamin</small>
+          <strong id="hasilJk">-</strong>
+        </div>
+
+        <div class="item">
+          <small>Alamat</small>
+          <strong id="hasilAlamat">-</strong>
+        </div>
+
+        <div class="item">
+          <small>Email</small>
+          <strong id="hasilEmail">-</strong>
+        </div>
+      </div>
+    </section>
+
   </main>
-  <footer>Website latihan mahasiswa — 2026</footer>
+
+  <footer>
+    Website Profil Mahasiswa &copy; 2026
+  </footer>
+
+  <script>
+    const inputFoto = document.getElementById("inputFoto");
+    const fotoProfil = document.getElementById("fotoProfil");
+    const statusFoto = document.getElementById("statusFoto");
+
+    let urlFotoSementara = null;
+
+    // Memilih dan menampilkan foto
+    inputFoto.addEventListener("change", function () {
+      const file = this.files[0];
+
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+        statusFoto.textContent = "Pilih file gambar yang valid.";
+        this.value = "";
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        statusFoto.textContent = "Ukuran foto maksimal 5 MB.";
+        this.value = "";
+        return;
+      }
+
+      if (urlFotoSementara) {
+        URL.revokeObjectURL(urlFotoSementara);
+      }
+
+      urlFotoSementara = URL.createObjectURL(file);
+      fotoProfil.src = urlFotoSementara;
+      statusFoto.textContent = "Foto berhasil dipilih: " + file.name;
+    });
+
+    // Menghapus foto yang dipilih
+    function hapusFoto() {
+      if (urlFotoSementara) {
+        URL.revokeObjectURL(urlFotoSementara);
+        urlFotoSementara = null;
+      }
+
+      fotoProfil.src =
+        "https://placehold.co/300x300/e2e8f0/164e63?text=Foto+Profil";
+
+      inputFoto.value = "";
+      statusFoto.textContent = "Foto profil telah dihapus.";
+    }
+
+    // Menampilkan biodata pada bagian bawah
+    function simpanBiodata() {
+      const data = {
+        Nama: document.getElementById("nama").value,
+        Nim: document.getElementById("nim").value,
+        Prodi: document.getElementById("prodi").value,
+        Kampus: document.getElementById("kampus").value,
+        Ttl: document.getElementById("ttl").value,
+        Jk: document.getElementById("jk").value,
+        Alamat: document.getElementById("alamat").value,
+        Email: document.getElementById("email").value
+      };
+
+      document.getElementById("tampilNama").textContent =
+        data.Nama || "Nama Mahasiswa";
+
+      document.getElementById("tampilProdi").textContent =
+        data.Prodi || "Mahasiswa";
+
+      const pasangan = {
+        hasilNama: data.Nama,
+        hasilNim: data.Nim,
+        hasilProdi: data.Prodi,
+        hasilKampus: data.Kampus,
+        hasilTtl: data.Ttl,
+        hasilJk: data.Jk,
+        hasilAlamat: data.Alamat,
+        hasilEmail: data.Email
+      };
+
+      for (const id in pasangan) {
+        document.getElementById(id).textContent =
+          pasangan[id].trim() || "-";
+      }
+    }
+  </script>
+
 </body>
 </html>
