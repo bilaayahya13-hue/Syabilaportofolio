@@ -1,733 +1,373 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Pribadi</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        :root {
-            --ungu: #7c3aed;
-            --biru: #2563eb;
-            --gelap: #111827;
-            --abu: #64748b;
-            --putih: #ffffff;
-            --latar: #f8fafc;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: var(--latar);
-            color: var(--gelap);
-            line-height: 1.7;
-        }
-
-        /* NAVIGASI */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 8%;
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 3px 15px #0000000a;
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: bold;
-            color: var(--ungu);
-        }
-
-        nav ul {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--gelap);
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--ungu);
-        }
-
-        /* BERANDA */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            padding: 70px 8%;
-            background: linear-gradient(135deg, #f5f3ff, #eff6ff);
-        }
-
-        .hero-text {
-            flex: 1;
-        }
-
-        .label {
-            display: inline-block;
-            background: #ede9fe;
-            color: var(--ungu);
-            padding: 7px 16px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 {
-            font-size: clamp(36px, 5vw, 58px);
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            color: var(--ungu);
-        }
-
-        .hero p {
-            color: var(--abu);
-            max-width: 520px;
-            margin-bottom: 28px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 23px;
-            background: linear-gradient(135deg, var(--ungu), var(--biru));
-            color: white;
-            text-decoration: none;
-            border-radius: 9px;
-            font-weight: bold;
-            margin-right: 8px;
-            border: 2px solid transparent;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px #7c3aed40;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--ungu);
-            border-color: var(--ungu);
-        }
-
-        .hero-image {
-            flex: 0 0 320px;
-            height: 350px;
-            border-radius: 35% 35% 20% 20%;
-            background: linear-gradient(135deg, #c4b5fd, #93c5fd);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 100px;
-            box-shadow: 15px 15px 0 #ddd6fe;
-            overflow: hidden;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* BAGIAN UMUM */
-        section {
-            padding: 85px 8%;
-            scroll-margin-top: 70px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 45px;
-        }
-
-        .section-title h2 {
-            font-size: 34px;
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: var(--abu);
-        }
-
-        .highlight {
-            color: var(--ungu);
-        }
-
-        /* TENTANG */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 35px;
-            align-items: center;
-        }
-
-        .about-box {
-            background: white;
-            padding: 30px;
-            border-radius: 18px;
-            box-shadow: 0 5px 25px #00000008;
-        }
-
-        .about-box h3 {
-            margin-bottom: 15px;
-            font-size: 23px;
-        }
-
-        .about-box p {
-            color: var(--abu);
-            margin-bottom: 12px;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .stat-card {
-            padding: 25px;
-            background: white;
-            border-radius: 15px;
-            text-align: center;
-            border-bottom: 4px solid var(--ungu);
-        }
-
-        .stat-card h3 {
-            font-size: 28px;
-            color: var(--ungu);
-        }
-
-        .stat-card p {
-            color: var(--abu);
-            font-size: 14px;
-        }
-
-        /* KEAHLIAN */
-        #keahlian {
-            background: white;
-        }
-
-        .skills {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-        }
-
-        .skill-card {
-            text-align: center;
-            padding: 30px 20px;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            transition: 0.3s;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-7px);
-            border-color: var(--ungu);
-            box-shadow: 0 10px 25px #7c3aed15;
-        }
-
-        .skill-icon {
-            font-size: 42px;
-            margin-bottom: 12px;
-        }
-
-        .skill-card h3 {
-            margin-bottom: 10px;
-        }
-
-        .skill-card p {
-            font-size: 14px;
-            color: var(--abu);
-        }
-
-        /* PROYEK */
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px #0000000a;
-            transition: 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-7px);
-        }
-
-        .project-cover {
-            height: 190px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 65px;
-        }
-
-        .cover-one {
-            background: linear-gradient(135deg, #ddd6fe, #c4b5fd);
-        }
-
-        .cover-two {
-            background: linear-gradient(135deg, #bfdbfe, #93c5fd);
-        }
-
-        .cover-three {
-            background: linear-gradient(135deg, #bbf7d0, #86efac);
-        }
-
-        .project-info {
-            padding: 22px;
-        }
-
-        .project-info h3 {
-            margin-bottom: 10px;
-        }
-
-        .project-info p {
-            color: var(--abu);
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        .tag {
-            display: inline-block;
-            background: #ede9fe;
-            color: #6d28d9;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin: 3px;
-        }
-
-        /* KONTAK */
-        #kontak {
-            background: linear-gradient(135deg, #f5f3ff, #eff6ff);
-        }
-
-        .contact-box {
-            max-width: 650px;
-            margin: auto;
-            background: white;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 5px 25px #0000000a;
-        }
-
-        .contact-box p {
-            color: var(--abu);
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 17px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 7px;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            font: inherit;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--ungu);
-        }
-
-        .contact-box .btn {
-            width: 100%;
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #cbd5e1;
-            background: #111827;
-        }
-
-        footer span {
-            color: #c4b5fd;
-        }
-
-        /* RESPONSIF */
-        @media (max-width: 850px) {
-            nav {
-                padding: 18px 5%;
-            }
-
-            nav ul {
-                gap: 12px;
-                font-size: 13px;
-            }
-
-            .hero {
-                padding: 60px 6%;
-            }
-
-            .hero-image {
-                flex-basis: 250px;
-                height: 280px;
-            }
-
-            .projects,
-            .skills {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero {
-                flex-direction: column-reverse;
-                text-align: center;
-            }
-
-            .hero p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-image {
-                flex-basis: auto;
-                width: 220px;
-                height: 240px;
-            }
-
-            .about-content,
-            .projects,
-            .skills {
-                grid-template-columns: 1fr;
-            }
-
-            section {
-                padding: 60px 6%;
-            }
-
-            .section-title h2 {
-                font-size: 28px;
-            }
-
-            .contact-box {
-                padding: 23px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portofolio Mahasiswa</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b1120;
+    color: #f1f5f9;
+    line-height: 1.7;
+}
+
+header {
+    background: #111b30;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    color: #38bdf8;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 18px;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+section {
+    padding: 75px 8%;
+}
+
+.hero {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.hero-text {
+    max-width: 650px;
+}
+
+.hero h1 {
+    font-size: clamp(34px, 5vw, 55px);
+    line-height: 1.2;
+    margin: 15px 0;
+}
+
+.hero h1 span,
+.accent {
+    color: #38bdf8;
+}
+
+.hero p,
+.muted {
+    color: #b7c4d8;
+}
+
+.button {
+    display: inline-block;
+    background: #38bdf8;
+    color: #07111f;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 22px;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #7dd3fc;
+}
+
+.profile {
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.photo-frame {
+    width: 250px;
+    height: 280px;
+    border: 4px solid #38bdf8;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #17243b;
+    margin: auto;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-label {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 9px 15px;
+    background: #1e293b;
+    border: 1px solid #38bdf8;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.center {
+    text-align: center;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #111b30;
+    border: 1px solid #24344e;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.card h3 {
+    color: #38bdf8;
+    margin-bottom: 10px;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.skills span {
+    background: #172b43;
+    color: #7dd3fc;
+    padding: 10px 17px;
+    border-radius: 8px;
+}
+
+.contact-links a {
+    color: #38bdf8;
+    text-decoration: none;
+}
+
+footer {
+    text-align: center;
+    background: #111b30;
+    padding: 22px;
+    color: #94a3b8;
+}
+
+@media (max-width: 750px) {
+    header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    nav a {
+        margin: 0;
+    }
+
+    .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding-top: 50px;
+    }
+
+    .photo-frame {
+        width: 210px;
+        height: 235px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- NAVIGASI -->
+<header>
+    <div class="logo">MyPortfolio.</div>
     <nav>
-        <div class="logo">MyPorto.</div>
-        <ul>
-            <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#tentang">Tentang</a></li>
-            <li><a href="#keahlian">Keahlian</a></li>
-            <li><a href="#proyek">Proyek</a></li>
-            <li><a href="#kontak">Kontak</a></li>
-        </ul>
+        <a href="#beranda">Beranda</a>
+        <a href="#tentang">Tentang</a>
+        <a href="#pendidikan">Pendidikan</a>
+        <a href="#keahlian">Keahlian</a>
+        <a href="#proyek">Proyek</a>
+        <a href="#kontak">Kontak</a>
     </nav>
+</header>
 
-    <!-- BERANDA -->
-</script> 
-            <span class="label">👋 Selamat Datang di Portofolio Saya</span>
+<section class="hero" id="beranda">
+    <div class="hero-text">
+        <p class="accent">PORTOFOLIO MAHASISWA</p>
+        <h1>Halo, saya <span>Nama Kamu</span></h1>
+        <h3>Mahasiswa Teknologi Informasi</h3>
+        <p>
+            Saya tertarik pada pengembangan website, desain antarmuka,
+            dan teknologi digital. Saya terus belajar untuk menciptakan
+            karya yang kreatif, menarik, dan bermanfaat.
+        </p>
+        <a href="#proyek" class="button">Lihat Proyek Saya</a>
+    </div>
 
-            <h1>Halo, Saya <span>Syabila Yahya</span></h1>
+    <div class="profile">
+        <div class="photo-frame">
+            <img id="fotoProfil"
+                 src="https://placehold.co/500x560/17243b/38bdf8?text=Foto+Saya"
+                 alt="Foto profil mahasiswa">
+        </div>
+        <label for="inputFoto" class="upload-label">Pilih Foto</label>
+        <input type="file" id="inputFoto" accept="image/*" hidden>
+        <p id="statusFoto" class="muted">Pilih foto dari komputer</p>
+    </div>
+</section>
 
+<section id="tentang">
+    <h2>Tentang <span class="accent">Saya</span></h2>
+    <div class="card">
+        <p>
+            Saya adalah mahasiswa yang memiliki semangat untuk belajar
+            dan mengembangkan kemampuan di bidang teknologi informasi.
+            Saya senang mempelajari pembuatan website, desain UI/UX,
+            pengolahan informasi, serta pengembangan aplikasi.
+        </p>
+        <p style="margin-top:12px">
+            Portofolio ini berisi informasi diri, pendidikan, keahlian,
+            dan beberapa proyek yang saya kerjakan selama belajar.
+        </p>
+    </div>
+</section>
+
+<section id="pendidikan">
+    <h2>Riwayat <span class="accent">Pendidikan</span></h2>
+    <div class="card-grid">
+        <div class="card">
+            <h3>Perguruan Tinggi</h3>
+            <p>Nama Universitas Kamu</p>
+            <p class="muted">Program Studi: Teknologi Informasi</p>
+            <p class="muted">Tahun: 20XX – Sekarang</p>
+        </div>
+        <div class="card">
+            <h3>Sekolah Menengah</h3>
+            <p>Nama Sekolah Kamu</p>
+            <p class="muted">Tahun: 20XX – 20XX</p>
+        </div>
+    </div>
+</section>
+
+<section id="keahlian">
+    <h2>Keahlian <span class="accent">Saya</span></h2>
+    <div class="skills">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript Dasar</span>
+        <span>Microsoft Word</span>
+        <span>Figma</span>
+        <span>Desain UI/UX</span>
+        <span>WordPress</span>
+        <span>Kerja Sama Tim</span>
+    </div>
+</section>
+
+<section id="proyek">
+    <h2>Proyek <span class="accent">Saya</span></h2>
+    <div class="card-grid">
+        <div class="card">
+            <h3>01. Website Portofolio</h3>
             <p>
-                Saya seorang mahasiswa yang tertarik pada dunia teknologi,
-                desain website, dan pengembangan aplikasi.
-                Saya senang belajar dan menciptakan karya digital yang menarik.
+                Website pribadi untuk menampilkan profil,
+                pendidikan, keahlian, dan hasil karya.
             </p>
-
-            <a href="#proyek" class="btn">Lihat Proyek →</a>
-            <a href="#tentang" class="btn btn-outline">Tentang Saya</a>
+            <p class="muted">Teknologi: HTML dan CSS</p>
         </div>
 
-        <div class="hero-image">
-    <img id="fotoProfil" src="foto-saya.jpg" alt="Foto Profil">
-</div>
+        <div class="card">
+            <h3>02. EcoReport</h3>
+            <p>
+                Konsep website pelaporan pencemaran lingkungan
+                yang membantu masyarakat menyampaikan laporan.
+            </p>
+            <p class="muted">Teknologi: Figma dan desain UI/UX</p>
+        </div>
 
-<div class="upload-foto">
-    <input
-        type="file"
-        id="inputFoto"
-        accept="image/*"
-        hidden
-    >
+        <div class="card">
+            <h3>03. Desain Antarmuka</h3>
+            <p>
+                Perancangan tampilan aplikasi dengan fokus
+                pada navigasi yang jelas dan mudah digunakan.
+            </p>
+            <p class="muted">Tools: Figma</p>
+        </div>
+    </div>
+</section>
 
-    <button type="button" onclick="document.getElementById('inputFoto').click()">
-        📷 Pilih Foto
-    </button>
+<section id="kontak">
+    <h2>Hubungi <span class="accent">Saya</span></h2>
+    <div class="card contact-links">
+        <p>Terima kasih sudah mengunjungi portofolio saya.</p>
+        <p>Email: <a href="mailto:emailkamu@example.com">emailkamu@example.com</a></p>
+        <p>Instagram: <a href="https://instagram.com/" target="_blank" rel="noopener">Akun Instagram Saya</a></p>
+        <p>GitHub: <a href="https://github.com/" target="_blank" rel="noopener">Profil GitHub Saya</a></p>
+    </div>
+</section>
 
-</div>
-    </header>
+<footer>
+    <p>© 2026 Portofolio Mahasiswa | Dibuat dengan HTML, CSS & JavaScript</p>
+</footer>
 
-    <main>
+<script>
+const inputFoto = document.getElementById("inputFoto");
+const fotoProfil = document.getElementById("fotoProfil");
+const statusFoto = document.getElementById("statusFoto");
 
-        <!-- TENTANG SAYA -->
-        <section id="tentang">
-            <div class="section-title">
-                <h2>Tentang <span class="highlight">Saya</span></h2>
-                <p>Mengenal lebih dekat diri dan perjalanan saya.</p>
-            </div>
+inputFoto.addEventListener("change", function () {
+    const file = this.files[0];
 
-            <div class="about-content">
-                <div class="about-box">
-                    <h3>Siapa Saya?</h3>
+    if (!file) return;
 
-                    <p>
-                        Halo! Saya <strong>Syabila Yahya</strong>, seorang mahasiswa
-                        yang memiliki minat dalam bidang teknologi informasi.
-                    </p>
+    if (!file.type.startsWith("image/")) {
+        statusFoto.textContent = "Silakan pilih file gambar.";
+        return;
+    }
 
-                    <p>
-                        Saya sedang mengembangkan kemampuan dalam HTML, CSS,
-                        desain antarmuka, dan pembuatan website.
-                        Saya percaya bahwa setiap proyek merupakan kesempatan
-                        untuk belajar dan berkembang.
-                    </p>
+    const reader = new FileReader();
 
-                    <a href="#kontak" class="btn">Hubungi Saya</a>
-                </div>
+    reader.onload = function (event) {
+        fotoProfil.src = event.target.result;
+        statusFoto.textContent = "Foto berhasil ditampilkan.";
+    };
 
-                <div class="stats">
-                    <div class="stat-card">
-                        <h3>02+</h3>
-                        <p>Tahun Belajar</p>
-                    </div>
-
-                    <div class="stat-card">
-                        <h3>02</h3>
-                        <p>Proyek Latihan</p>
-                    </div>
-
-                    <div class="stat-card">
-                        <h3>03+</h3>
-                        <p>Keahlian</p>
-                    </div>
-
-                    <div class="stat-card">
-                        <h3>100%</h3>
-                        <p>Semangat Belajar</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- KEAHLIAN -->
-        <section id="keahlian">
-            <div class="section-title">
-                <h2>Keahlian <span class="highlight">Saya</span></h2>
-                <p>Beberapa bidang yang sedang saya pelajari.</p>
-            </div>
-
-            <div class="skills">
-                <div class="skill-card">
-                    <div class="skill-icon">🌐</div>
-                    <h3>HTML</h3>
-                    <p>Menyusun struktur halaman website yang rapi dan teratur.</p>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">🎨</div>
-                    <h3>CSS</h3>
-                    <p>Mendesain tampilan website yang modern dan responsif.</p>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">💻</div>
-                    <h3>JavaScript</h3>
-                    <p>Membuat interaksi dan fungsi sederhana pada website.</p>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">🖌️</div>
-                    <h3>UI/UX Design</h3>
-                    <p>Membuat rancangan antarmuka yang menarik dan mudah digunakan.</p>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">🧩</div>
-                    <h3>Problem Solving</h3>
-                    <p>Mencari solusi dan menyelesaikan masalah secara bertahap.</p>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">📚</div>
-                    <h3>Terus Belajar</h3>
-                    <p>Mengembangkan pengetahuan melalui latihan dan proyek.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- PROYEK -->
-        <section id="proyek">
-            <div class="section-title">
-                <h2>Proyek <span class="highlight">Saya</span></h2>
-                <p>Contoh karya yang dapat ditampilkan di portofolio.</p>
-            </div>
-
-            <div class="projects">
-                <article class="project-card">
-                    <div class="project-cover cover-one">🌱</div>
-
-                    <div class="project-info">
-                        <h3>EcoReport</h3>
-                        <p>
-                            Konsep website untuk membantu masyarakat
-                            melaporkan pencemaran lingkungan.
-                        </p>
-
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">UI/UX</span>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-cover cover-two">📊</div>
-
-                    <div class="project-info">
-                        <h3>Aplikasi Keuangan</h3>
-                        <p>
-                            Rancangan aplikasi sederhana untuk mencatat
-                            pemasukan dan pengeluaran.
-                        </p>
-
-                        <span class="tag">Desain</span>
-                        <span class="tag">Prototype</span>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-cover cover-three">🧑‍💻</div>
-
-                    <div class="project-info">
-                        <h3>Website Profil</h3>
-                        <p>
-                            Website profil pribadi untuk menampilkan
-                            biodata, keahlian, dan informasi kontak.
-                        </p>
-
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- KONTAK -->
-        <section id="kontak">
-            <div class="section-title">
-                <h2>Hubungi <span class="highlight">Saya</span></h2>
-                <p>Punya pertanyaan atau ingin berdiskusi? Kirim pesan.</p>
-            </div>
-
-            <div class="contact-box">
-                <p>
-                    Silakan isi formulir berikut untuk menyiapkan pesan
-                    yang akan dikirim melalui aplikasi email.
-                </p>
-
-                <form id="formKontak">
-                    <div class="form-group">
-                        <label for="nama">Nama Lengkap</label>
-                        <input type="text" id="nama" required
-                            placeholder="Masukkan nama Anda">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Anda</label>
-                        <input type="email" id="email" required
-                            placeholder="nama@email.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pesan">Pesan</label>
-                        <textarea id="pesan" rows="4" required
-                            placeholder="Tuliskan pesan Anda"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn">Siapkan Pesan ✉️</button>
-                </form>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-        <p>© 2026 <span>MyPorto.</span> Dibuat dengan HTML dan CSS.</p>
-    </footer>
-
-    <script>
-        document.getElementById("formKontak").addEventListener("submit", function(e) {
-            e.preventDefault();
-
-            const nama = document.getElementById("nama").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const pesan = document.getElementById("pesan").value.trim();
-
-            const subjek = encodeURIComponent("Pesan portofolio dari " + nama);
-            const isi = encodeURIComponent(
-                "Nama: " + nama +
-                "\nEmail: " + email +
-                "\n\nPesan:\n" + pesan
-            );
-
-            // Ganti alamat berikut dengan email milik Anda.
-            window.location.href =
-                "mailto:emailkamu@example.com?subject=" +
-                subjek + "&body=" + isi;
-        });
-    </script>
+    reader.readAsDataURL(file);
+});
+</script>
 
 </body>
 </html>
