@@ -1,376 +1,733 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profil Mahasiswa</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Pribadi</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #eef2f7;
-      color: #1e293b;
-    }
+        :root {
+            --ungu: #7c3aed;
+            --biru: #2563eb;
+            --gelap: #111827;
+            --abu: #64748b;
+            --putih: #ffffff;
+            --latar: #f8fafc;
+        }
 
-    header {
-      background: linear-gradient(135deg, #164e63, #6d28d9);
-      color: white;
-      text-align: center;
-      padding: 35px 15px 75px;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--latar);
+            color: var(--gelap);
+            line-height: 1.7;
+        }
 
-    header h1 {
-      margin: 0 0 10px;
-    }
+        /* NAVIGASI */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 15px #0000000a;
+        }
 
-    main {
-      max-width: 750px;
-      margin: -45px auto 25px;
-      padding: 0 15px;
-    }
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: var(--ungu);
+        }
 
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 16px;
-      margin-bottom: 20px;
-      box-shadow: 0 5px 20px #0000000d;
-    }
+        nav ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
 
-    .profile {
-      text-align: center;
-    }
+        nav a {
+            text-decoration: none;
+            color: var(--gelap);
+            font-weight: bold;
+            transition: 0.3s;
+        }
 
-    #fotoProfil {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #0e7490;
-      background: #e2e8f0;
-      display: block;
-      margin: -75px auto 15px;
-    }
+        nav a:hover {
+            color: var(--ungu);
+        }
 
-    h2 {
-      color: #0e7490;
-    }
+        /* BERANDA */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 70px 8%;
+            background: linear-gradient(135deg, #f5f3ff, #eff6ff);
+        }
 
-    .btn {
-      display: inline-block;
-      border: none;
-      border-radius: 8px;
-      padding: 12px 18px;
-      background: #0e7490;
-      color: white;
-      font-size: 15px;
-      cursor: pointer;
-      margin: 5px;
-    }
+        .hero-text {
+            flex: 1;
+        }
 
-    .btn:hover {
-      background: #164e63;
-    }
+        .label {
+            display: inline-block;
+            background: #ede9fe;
+            color: var(--ungu);
+            padding: 7px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-    .btn-hapus {
-      background: #dc2626;
-    }
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 58px);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
 
-    .btn-hapus:hover {
-      background: #991b1b;
-    }
+        .hero h1 span {
+            color: var(--ungu);
+        }
 
-    .form-group {
-      margin-bottom: 15px;
-      text-align: left;
-    }
+        .hero p {
+            color: var(--abu);
+            max-width: 520px;
+            margin-bottom: 28px;
+        }
 
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-    }
+        .btn {
+            display: inline-block;
+            padding: 12px 23px;
+            background: linear-gradient(135deg, var(--ungu), var(--biru));
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-weight: bold;
+            margin-right: 8px;
+            border: 2px solid transparent;
+            transition: 0.3s;
+            cursor: pointer;
+        }
 
-    input, textarea, select {
-      width: 100%;
-      padding: 11px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font: inherit;
-    }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px #7c3aed40;
+        }
 
-    .biodata {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
+        .btn-outline {
+            background: transparent;
+            color: var(--ungu);
+            border-color: var(--ungu);
+        }
 
-    .item {
-      background: #f8fafc;
-      border-radius: 8px;
-      padding: 12px;
-      overflow-wrap: anywhere;
-    }
+        .hero-image {
+            flex: 0 0 320px;
+            height: 350px;
+            border-radius: 35% 35% 20% 20%;
+            background: linear-gradient(135deg, #c4b5fd, #93c5fd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            box-shadow: 15px 15px 0 #ddd6fe;
+            overflow: hidden;
+        }
 
-    .item small {
-      display: block;
-      color: #64748b;
-      margin-bottom: 5px;
-    }
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #64748b;
-    }
+        /* BAGIAN UMUM */
+        section {
+            padding: 85px 8%;
+            scroll-margin-top: 70px;
+        }
 
-    @media (max-width: 500px) {
-      .biodata {
-        grid-template-columns: 1fr;
-      }
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
 
-      .card {
-        padding: 18px;
-      }
-    }
-  </style>
+        .section-title h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--abu);
+        }
+
+        .highlight {
+            color: var(--ungu);
+        }
+
+        /* TENTANG */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .about-box {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 25px #00000008;
+        }
+
+        .about-box h3 {
+            margin-bottom: 15px;
+            font-size: 23px;
+        }
+
+        .about-box p {
+            color: var(--abu);
+            margin-bottom: 12px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-card {
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            text-align: center;
+            border-bottom: 4px solid var(--ungu);
+        }
+
+        .stat-card h3 {
+            font-size: 28px;
+            color: var(--ungu);
+        }
+
+        .stat-card p {
+            color: var(--abu);
+            font-size: 14px;
+        }
+
+        /* KEAHLIAN */
+        #keahlian {
+            background: white;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .skill-card {
+            text-align: center;
+            padding: 30px 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-7px);
+            border-color: var(--ungu);
+            box-shadow: 0 10px 25px #7c3aed15;
+        }
+
+        .skill-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .skill-card p {
+            font-size: 14px;
+            color: var(--abu);
+        }
+
+        /* PROYEK */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px #0000000a;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-7px);
+        }
+
+        .project-cover {
+            height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 65px;
+        }
+
+        .cover-one {
+            background: linear-gradient(135deg, #ddd6fe, #c4b5fd);
+        }
+
+        .cover-two {
+            background: linear-gradient(135deg, #bfdbfe, #93c5fd);
+        }
+
+        .cover-three {
+            background: linear-gradient(135deg, #bbf7d0, #86efac);
+        }
+
+        .project-info {
+            padding: 22px;
+        }
+
+        .project-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            color: var(--abu);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 3px;
+        }
+
+        /* KONTAK */
+        #kontak {
+            background: linear-gradient(135deg, #f5f3ff, #eff6ff);
+        }
+
+        .contact-box {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px #0000000a;
+        }
+
+        .contact-box p {
+            color: var(--abu);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font: inherit;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--ungu);
+        }
+
+        .contact-box .btn {
+            width: 100%;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #cbd5e1;
+            background: #111827;
+        }
+
+        footer span {
+            color: #c4b5fd;
+        }
+
+        /* RESPONSIF */
+        @media (max-width: 850px) {
+            nav {
+                padding: 18px 5%;
+            }
+
+            nav ul {
+                gap: 12px;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 60px 6%;
+            }
+
+            .hero-image {
+                flex-basis: 250px;
+                height: 280px;
+            }
+
+            .projects,
+            .skills {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-image {
+                flex-basis: auto;
+                width: 220px;
+                height: 240px;
+            }
+
+            .about-content,
+            .projects,
+            .skills {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 60px 6%;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .contact-box {
+                padding: 23px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Profil Mahasiswa</h1>
-    <p>Website Biodata dan Profil Pribadi</p>
-  </header>
+    <!-- NAVIGASI -->
+    <nav>
+        <div class="logo">MyPorto.</div>
+        <ul>
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#keahlian">Keahlian</a></li>
+            <li><a href="#proyek">Proyek</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+    </nav>
 
-  <main>
+    <!-- BERANDA -->
+</script> 
+            <span class="label">👋 Selamat Datang di Portofolio Saya</span>
 
-    <section class="card profile">
-      <img
-        id="fotoProfil"
-        src="https://placehold.co/300x300/e2e8f0/164e63?text=Foto+Profil"
-        alt="Foto profil mahasiswa"
-      >
+            <h1>Halo, Saya <span>Syabila Yahya</span></h1>
 
-      <h2 id="tampilNama">Syabila Yahya</h2>
-      <p id="tampilProdi">Mahasiswa Informatika</p>
+            <p>
+                Saya seorang mahasiswa yang tertarik pada dunia teknologi,
+                desain website, dan pengembangan aplikasi.
+                Saya senang belajar dan menciptakan karya digital yang menarik.
+            </p>
 
-      <!-- INPUT FOTO -->
-      <input
+            <a href="#proyek" class="btn">Lihat Proyek →</a>
+            <a href="#tentang" class="btn btn-outline">Tentang Saya</a>
+        </div>
+
+        <div class="hero-image">
+    <img id="fotoProfil" src="foto-saya.jpg" alt="Foto Profil">
+</div>
+
+<div class="upload-foto">
+    <input
         type="file"
         id="inputFoto"
         accept="image/*"
         hidden
-      >
+    >
 
-      <button
-        type="button"
-        class="btn"
-        onclick="document.getElementById('inputFoto').click()"
-      >
+    <button type="button" onclick="document.getElementById('inputFoto').click()">
         📷 Pilih Foto
-      </button>
+    </button>
 
-      <p id="statusFoto" aria-live="polite">
-        Pilih foto dari galeri atau folder perangkat.
-      </p>
-    </section>
+</div>
+    </header>
 
-    <section class="card">
-      <h2>📝 Isi Biodata</h2>
+    <main>
 
-      <div class="form-group">
-        <label for="nama">Nama Lengkap</label>
-        <input id="nama" placeholder="Masukkan nama lengkap">
-      </div>
+        <!-- TENTANG SAYA -->
+        <section id="tentang">
+            <div class="section-title">
+                <h2>Tentang <span class="highlight">Saya</span></h2>
+                <p>Mengenal lebih dekat diri dan perjalanan saya.</p>
+            </div>
 
-      <div class="form-group">
-        <label for="nim">NIM</label>
-        <input id="nim" placeholder="Masukkan NIM">
-      </div>
+            <div class="about-content">
+                <div class="about-box">
+                    <h3>Siapa Saya?</h3>
 
-      <div class="form-group">
-        <label for="prodi">Program Studi</label>
-        <input id="prodi" placeholder="Contoh: Informatika">
-      </div>
+                    <p>
+                        Halo! Saya <strong>Syabila Yahya</strong>, seorang mahasiswa
+                        yang memiliki minat dalam bidang teknologi informasi.
+                    </p>
 
-      <div class="form-group">
-        <label for="kampus">Nama Universitas</label>
-        <input id="kampus" placeholder="Masukkan nama universitas">
-      </div>
+                    <p>
+                        Saya sedang mengembangkan kemampuan dalam HTML, CSS,
+                        desain antarmuka, dan pembuatan website.
+                        Saya percaya bahwa setiap proyek merupakan kesempatan
+                        untuk belajar dan berkembang.
+                    </p>
 
-      <div class="form-group">
-        <label for="ttl">Tempat, Tanggal Lahir</label>
-        <input id="ttl" placeholder="Contoh: Makassar, 1 Januari 2005">
-      </div>
+                    <a href="#kontak" class="btn">Hubungi Saya</a>
+                </div>
 
-      <div class="form-group">
-        <label for="jk">Jenis Kelamin</label>
-        <select id="jk">
-          <option value="">Pilih jenis kelamin</option>
-          <option>Laki-laki</option>
-          <option>Perempuan</option>
-        </select>
-      </div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3>02+</h3>
+                        <p>Tahun Belajar</p>
+                    </div>
 
-      <div class="form-group">
-        <label for="alamat">Alamat</label>
-        <textarea id="alamat" rows="2"
-          placeholder="Masukkan alamat yang ingin ditampilkan"></textarea>
-      </div>
+                    <div class="stat-card">
+                        <h3>02</h3>
+                        <p>Proyek Latihan</p>
+                    </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" type="email" placeholder="nama@email.com">
-      </div>
+                    <div class="stat-card">
+                        <h3>03+</h3>
+                        <p>Keahlian</p>
+                    </div>
 
-      <button type="button" class="btn" onclick="simpanBiodata()">
-        💾 Tampilkan Biodata
-      </button>
-    </section>
+                    <div class="stat-card">
+                        <h3>100%</h3>
+                        <p>Semangat Belajar</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="card">
-      <h2>👤 Biodata Saya</h2>
+        <!-- KEAHLIAN -->
+        <section id="keahlian">
+            <div class="section-title">
+                <h2>Keahlian <span class="highlight">Saya</span></h2>
+                <p>Beberapa bidang yang sedang saya pelajari.</p>
+            </div>
 
-      <div class="biodata">
-        <div class="item">
-          <small>Nama Lengkap</small>
-          <strong id="hasilNama">-</strong>
-        </div>
+            <div class="skills">
+                <div class="skill-card">
+                    <div class="skill-icon">🌐</div>
+                    <h3>HTML</h3>
+                    <p>Menyusun struktur halaman website yang rapi dan teratur.</p>
+                </div>
 
-        <div class="item">
-          <small>NIM</small>
-          <strong id="hasilNim">-</strong>
-        </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>CSS</h3>
+                    <p>Mendesain tampilan website yang modern dan responsif.</p>
+                </div>
 
-        <div class="item">
-          <small>Program Studi</small>
-          <strong id="hasilProdi">-</strong>
-        </div>
+                <div class="skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3>JavaScript</h3>
+                    <p>Membuat interaksi dan fungsi sederhana pada website.</p>
+                </div>
 
-        <div class="item">
-          <small>Universitas</small>
-          <strong id="hasilKampus">-</strong>
-        </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🖌️</div>
+                    <h3>UI/UX Design</h3>
+                    <p>Membuat rancangan antarmuka yang menarik dan mudah digunakan.</p>
+                </div>
 
-        <div class="item">
-          <small>Tempat, Tanggal Lahir</small>
-          <strong id="hasilTtl">-</strong>
-        </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🧩</div>
+                    <h3>Problem Solving</h3>
+                    <p>Mencari solusi dan menyelesaikan masalah secara bertahap.</p>
+                </div>
 
-        <div class="item">
-          <small>Jenis Kelamin</small>
-          <strong id="hasilJk">-</strong>
-        </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📚</div>
+                    <h3>Terus Belajar</h3>
+                    <p>Mengembangkan pengetahuan melalui latihan dan proyek.</p>
+                </div>
+            </div>
+        </section>
 
-        <div class="item">
-          <small>Alamat</small>
-          <strong id="hasilAlamat">-</strong>
-        </div>
+        <!-- PROYEK -->
+        <section id="proyek">
+            <div class="section-title">
+                <h2>Proyek <span class="highlight">Saya</span></h2>
+                <p>Contoh karya yang dapat ditampilkan di portofolio.</p>
+            </div>
 
-        <div class="item">
-          <small>Email</small>
-          <strong id="hasilEmail">-</strong>
-        </div>
-      </div>
-    </section>
+            <div class="projects">
+                <article class="project-card">
+                    <div class="project-cover cover-one">🌱</div>
 
-  </main>
+                    <div class="project-info">
+                        <h3>EcoReport</h3>
+                        <p>
+                            Konsep website untuk membantu masyarakat
+                            melaporkan pencemaran lingkungan.
+                        </p>
 
-  <footer>
-    Website Profil Mahasiswa &copy; 2026
-  </footer>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                </article>
 
-  <script>
-    const inputFoto = document.getElementById("inputFoto");
-    const fotoProfil = document.getElementById("fotoProfil");
-    const statusFoto = document.getElementById("statusFoto");
+                <article class="project-card">
+                    <div class="project-cover cover-two">📊</div>
 
-    let urlFotoSementara = null;
+                    <div class="project-info">
+                        <h3>Aplikasi Keuangan</h3>
+                        <p>
+                            Rancangan aplikasi sederhana untuk mencatat
+                            pemasukan dan pengeluaran.
+                        </p>
 
-    // Memilih dan menampilkan foto
-    inputFoto.addEventListener("change", function () {
-      const file = this.files[0];
+                        <span class="tag">Desain</span>
+                        <span class="tag">Prototype</span>
+                    </div>
+                </article>
 
-      if (!file) return;
+                <article class="project-card">
+                    <div class="project-cover cover-three">🧑‍💻</div>
 
-      if (!file.type.startsWith("image/")) {
-        statusFoto.textContent = "Pilih file gambar yang valid.";
-        this.value = "";
-        return;
-      }
+                    <div class="project-info">
+                        <h3>Website Profil</h3>
+                        <p>
+                            Website profil pribadi untuk menampilkan
+                            biodata, keahlian, dan informasi kontak.
+                        </p>
 
-      if (file.size > 5 * 1024 * 1024) {
-        statusFoto.textContent = "Ukuran foto maksimal 5 MB.";
-        this.value = "";
-        return;
-      }
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-      if (urlFotoSementara) {
-        URL.revokeObjectURL(urlFotoSementara);
-      }
+        <!-- KONTAK -->
+        <section id="kontak">
+            <div class="section-title">
+                <h2>Hubungi <span class="highlight">Saya</span></h2>
+                <p>Punya pertanyaan atau ingin berdiskusi? Kirim pesan.</p>
+            </div>
 
-      urlFotoSementara = URL.createObjectURL(file);
-      fotoProfil.src = urlFotoSementara;
-      statusFoto.textContent = "Foto berhasil dipilih: " + file.name;
-    });
+            <div class="contact-box">
+                <p>
+                    Silakan isi formulir berikut untuk menyiapkan pesan
+                    yang akan dikirim melalui aplikasi email.
+                </p>
 
-    // Menghapus foto yang dipilih
-    function hapusFoto() {
-      if (urlFotoSementara) {
-        URL.revokeObjectURL(urlFotoSementara);
-        urlFotoSementara = null;
-      }
+                <form id="formKontak">
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap</label>
+                        <input type="text" id="nama" required
+                            placeholder="Masukkan nama Anda">
+                    </div>
 
-      fotoProfil.src =
-        "https://placehold.co/300x300/e2e8f0/164e63?text=Foto+Profil";
+                    <div class="form-group">
+                        <label for="email">Email Anda</label>
+                        <input type="email" id="email" required
+                            placeholder="nama@email.com">
+                    </div>
 
-      inputFoto.value = "";
-      statusFoto.textContent = "Foto profil telah dihapus.";
-    }
+                    <div class="form-group">
+                        <label for="pesan">Pesan</label>
+                        <textarea id="pesan" rows="4" required
+                            placeholder="Tuliskan pesan Anda"></textarea>
+                    </div>
 
-    // Menampilkan biodata pada bagian bawah
-    function simpanBiodata() {
-      const data = {
-        Nama: document.getElementById("nama").value,
-        Nim: document.getElementById("nim").value,
-        Prodi: document.getElementById("prodi").value,
-        Kampus: document.getElementById("kampus").value,
-        Ttl: document.getElementById("ttl").value,
-        Jk: document.getElementById("jk").value,
-        Alamat: document.getElementById("alamat").value,
-        Email: document.getElementById("email").value
-      };
+                    <button type="submit" class="btn">Siapkan Pesan ✉️</button>
+                </form>
+            </div>
+        </section>
 
-      document.getElementById("tampilNama").textContent =
-        data.Nama || "Nama Mahasiswa";
+    </main>
 
-      document.getElementById("tampilProdi").textContent =
-        data.Prodi || "Mahasiswa";
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 <span>MyPorto.</span> Dibuat dengan HTML dan CSS.</p>
+    </footer>
 
-      const pasangan = {
-        hasilNama: data.Nama,
-        hasilNim: data.Nim,
-        hasilProdi: data.Prodi,
-        hasilKampus: data.Kampus,
-        hasilTtl: data.Ttl,
-        hasilJk: data.Jk,
-        hasilAlamat: data.Alamat,
-        hasilEmail: data.Email
-      };
+    <script>
+        document.getElementById("formKontak").addEventListener("submit", function(e) {
+            e.preventDefault();
 
-      for (const id in pasangan) {
-        document.getElementById(id).textContent =
-          pasangan[id].trim() || "-";
-      }
-    }
-  </script>
+            const nama = document.getElementById("nama").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const pesan = document.getElementById("pesan").value.trim();
+
+            const subjek = encodeURIComponent("Pesan portofolio dari " + nama);
+            const isi = encodeURIComponent(
+                "Nama: " + nama +
+                "\nEmail: " + email +
+                "\n\nPesan:\n" + pesan
+            );
+
+            // Ganti alamat berikut dengan email milik Anda.
+            window.location.href =
+                "mailto:emailkamu@example.com?subject=" +
+                subjek + "&body=" + isi;
+        });
+    </script>
 
 </body>
 </html>
